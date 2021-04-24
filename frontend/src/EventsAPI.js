@@ -1,4 +1,5 @@
-const api = 'http://localhost:5001';
+const url = window.location.hostname;
+const api = url || 'http://localhost:5001';
 
 const headers = {
   'Accept': 'application/json',
