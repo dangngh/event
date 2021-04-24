@@ -1,5 +1,4 @@
-const url = window.location.hostname;
-const api = url || 'http://localhost:5001';
+const api = 'https://glacial-falls-05265.herokuapp.com';
 
 const headers = {
   'Accept': 'application/json',
