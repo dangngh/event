@@ -16,6 +16,8 @@
     "build": "cd frontend && npm install && npm run build"
   },
   "engines": {
-    "node": "v15.14.0"
+    "node": "v15.14.0",
+    "yarn": "1.22.10",
+    "npm": "7.7.6"
   }
 }
