@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, '/frontend/build')));
 
-console.log(path.join(__dirname, '/frontend/build'))
+console.log(path.resolve(__dirname, '/frontend/build'))
 
 app.get('/', (req, res) => {
   // console.log('api')
