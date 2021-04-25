@@ -12,14 +12,14 @@ app.use(bodyParser.json())
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
 app.get('/', (req, res) => {
-  res.send('received')
-  // axios.get('https://app.ticketmaster.com/discovery/v2/events.json?countryCode=CA&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg')
-  //   .then(events => {
-  //     res.json(events.data._embedded.events);
-  //   })
-  //   .catch(error => {
-  //     res.json('No available events');
-  //   })
+  // res.send('received')
+  axios.get('https://app.ticketmaster.com/discovery/v2/events.json?countryCode=CA&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg')
+    .then(events => {
+      res.json(events.data._embedded.events);
+    })
+    .catch(error => {
+      res.json('No available events');
+    })
 })
 
 app.post('/local', (req, res) => {
