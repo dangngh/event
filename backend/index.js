@@ -22,11 +22,12 @@ app.get('/', (req, res) => {
       res.json(events.data._embedded.events);
     })
     .catch(error => {
-      res.send('No available events');
+      res.json('No available events');
     })
 })
 
 app.post('/local', (req, res) => {
+  console.log('local')
   const {location } = req.body
   axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?city=${location}&stateCode=BC&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg`)
     .then(events => {

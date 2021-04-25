@@ -1,7 +1,6 @@
 import React from 'react'
 
 const EventsList = (props) => {
-  console.log(props.events)
   return (
     <div>
       <ul class='events-list'>

@@ -38,9 +38,10 @@ class App extends Component {
     this.getGeolocation()
     EventsAPI.getEvents()
       .then(events => {
+        console.loh(events)
         this.setState({events})
       })
-      .catch(error => {console.log(error)})
+      .catch(error => {throw error;})
   }
   render() {
     return (
