@@ -9,12 +9,10 @@ const path = require('path');
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use(express.static(path.resolve(__dirname, '../frontend/build')));
-
 app.get('/', (req, res) => {
-  // res.send('received')
   axios.get('https://app.ticketmaster.com/discovery/v2/events.json?countryCode=CA&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg')
     .then(events => {
+      console.log(events)
       res.json(events.data._embedded.events);
     })
     .catch(error => {
@@ -22,8 +20,13 @@ app.get('/', (req, res) => {
     })
 })
 
+app.use(express.static(path.resolve(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+});
+
 app.post('/local', (req, res) => {
-  console.log('local')
   const {location } = req.body
   axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?city=${location}&stateCode=BC&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg`)
     .then(events => {
@@ -33,9 +36,7 @@ app.post('/local', (req, res) => {
       res.send('No available events');
     })
 })
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
-});
+
 // app.use(express.static(path.join(__dirname, '/frontend/build')));
 
 // app.get('/', function (req, res) {
