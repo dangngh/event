@@ -5,11 +5,12 @@ const axios = require('axios')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path');
+const { nextTick } = require('process')
 
 app.use(cors())
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
   axios.get('https://app.ticketmaster.com/discovery/v2/events.json?countryCode=CA&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg')
     .then(events => {
       console.log(events)
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
     .catch(error => {
       res.json('No available events');
     })
+    next();
 })
 
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
