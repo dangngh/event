@@ -7,7 +7,7 @@ const headers = {
 
 export const getEvents = () =>
   fetch(`${api}`, { headers })
-    .then(res => res.json())
+    .then(res => console.log(res))
     .then(events => events)
 
 export const getLocalEvents = (city) =>
