@@ -11,10 +11,6 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
-});
-
 app.get('/', (req, res) => {
   console.log('request', req);
   axios.get('https://app.ticketmaster.com/discovery/v2/events.json?countryCode=CA&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg')
@@ -37,6 +33,9 @@ app.post('/local', (req, res) => {
       res.send('No available events');
     })
 })
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+});
 // app.use(express.static(path.join(__dirname, '/frontend/build')));
 
 // app.get('/', function (req, res) {
