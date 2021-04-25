@@ -10,12 +10,11 @@ const { nextTick } = require('process')
 app.use(cors())
 app.use(bodyParser.json())
 
-// app.use(express.static(path.resolve(__dirname, '../frontend/build')));
-app.get('/a', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
-});
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+
 
 app.get('/', (req, res) => {
+  // console.log('api')
   axios.get('https://app.ticketmaster.com/discovery/v2/events.json?countryCode=CA&source=ticketmaster&apikey=gqt3xm5JcOR5QBigmIndcAkGGjQBPNGg')
     .then(events => {
       console.log(events)
@@ -26,6 +25,9 @@ app.get('/', (req, res) => {
     })
 })
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
 
 app.post('/local', (req, res) => {
   const {location } = req.body
